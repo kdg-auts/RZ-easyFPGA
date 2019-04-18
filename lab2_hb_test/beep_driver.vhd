@@ -1,15 +1,15 @@
 -------------------------------------------------------------------------------
--- Description : äðàéâåð èçëó÷àòåëÿ çâóêà
+-- Description : драйвер излучателя звука
 -------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
 entity beep_driver is
 	generic (
-		SND_MODE: std_logic := '1'; -- ðåæèì ðàáîòû: "0" = êîíñòàíòà, "1" = ÷àñòîòà
-		SB_PERIOD: integer := 10000000; -- êîëè÷åñòâî ïåðèîäîâ CLK äëÿ 200 ìñ (Fclk = 50 MHz)
-		LB_PERIOD: integer := 50000000; -- êîëè÷åñòâî ïåðèîäîâ CLK äëÿ 1ñåê (Fclk = 50 MHz)
-		SND_PERIOD: integer := 25000 -- êîëè÷åñòâî ïåðèîäîâ CLK äëÿ 0,5 ìñ (Fçâ = 2 êÃö)
+		SND_MODE: std_logic := '1'; -- режим работы: "0" = константа, "1" = частота
+		SB_PERIOD: integer := 10000000; -- количество периодов CLK для 200 мс (Fclk = 50 MHz)
+		LB_PERIOD: integer := 50000000; -- количество периодов CLK для 1сек (Fclk = 50 MHz)
+		SND_PERIOD: integer := 25000 -- количество периодов CLK для 0,5 мс (Fçâ = 2 êÃö)
 	);
 	port(
 		SB : in STD_LOGIC;
@@ -21,12 +21,12 @@ entity beep_driver is
 end beep_driver;
 
 architecture beep_driver_arch of beep_driver is
-	signal beep_count: INTEGER range 0 to LB_PERIOD-1; -- ñ÷åò÷èê ïåðèîäà âðåìåíè âûâîäà çâóêà
-	signal snd_count: INTEGER range 0 to SND_PERIOD-1; -- ñ÷åò÷èê ãåíåðàòîðà çâóêîâîé ÷àñòîòû
-	signal snd_wave: std_logic; -- çâóêîâàÿ ÷àñòîòà 2 êÃö
-	signal beep_en: std_logic; -- ðàçðåøåíèå äëÿ âûâîäà çâóêà
-	type snd_state_type is (IDLE, SBEEP, LBEEP); -- ñîñòîÿíèÿ àâòîìàòà çâóêîãåíåðàòîðà
-	signal snd_state: snd_state_type := IDLE; -- àâòîìàò çâóêîãåíåðàòîðà
+	signal beep_count: INTEGER range 0 to LB_PERIOD-1; -- счетчик периода времени вывода звука
+	signal snd_count: INTEGER range 0 to SND_PERIOD-1; -- счетчик генератора звуковой частоты
+	signal snd_wave: std_logic; -- звуковая частота 2 кГц
+	signal beep_en: std_logic; -- разрешение для вывода звука
+	type snd_state_type is (IDLE, SBEEP, LBEEP); -- состояния автомата звукогенератора
+	signal snd_state: snd_state_type := IDLE; -- автомат звукогенератора
 begin
 	snd_gen: process(clk, rst)
 	begin

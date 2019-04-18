@@ -4,14 +4,14 @@
 -- From        : interface description file
 -- By          : Itf2Vhdl ver. 1.22
 -------------------------------------------------------------------------------
--- Description : äðàéâåð 7-ñåãì. èíäèêàòîðà íà 4 ñèìâîëà
+-- Description : драйвер 7-сегм. индикатора на 4 символа
 -------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
 entity HEXLed_driver is
 	generic (
-		CNT_LIMIT: integer := 1000000 -- ÷èñëî ïåðèîäîâ CLK äëÿ ôîðìèðîâàíèÿ çàäåðæêè â 20ìñ
+		CNT_LIMIT: integer := 1000000 -- число периодов CLK для формирования задержки в 20мс
 	);
 	port(
 		D1 : in STD_LOGIC;
