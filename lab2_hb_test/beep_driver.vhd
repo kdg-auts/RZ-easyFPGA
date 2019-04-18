@@ -9,7 +9,7 @@ entity beep_driver is
 		SND_MODE: std_logic := '1'; -- режим работы: "0" = константа, "1" = частота
 		SB_PERIOD: integer := 10000000; -- количество периодов CLK для 200 мс (Fclk = 50 MHz)
 		LB_PERIOD: integer := 50000000; -- количество периодов CLK для 1сек (Fclk = 50 MHz)
-		SND_PERIOD: integer := 25000 -- количество периодов CLK для 0,5 мс (Fçâ = 2 êÃö)
+		SND_PERIOD: integer := 25000 -- количество периодов CLK для 0,5 мс (Fsnd = 2 kHz)
 	);
 	port(
 		SB : in STD_LOGIC;
