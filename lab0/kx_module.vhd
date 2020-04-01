@@ -1,3 +1,9 @@
+-- project: lab0 - demo and introduction
+-- file: kx_module_testbench.vhd
+-- description:
+--    simple combinatorial module description; main purpose: to get
+--    familiar with design flow and development environment
+
 library IEEE;
 use IEEE.std_logic_1164.all;
 entity kx_module is
@@ -11,11 +17,14 @@ architecture kx_arc of kx_module is
 signal int_x, int_y: std_logic_vector(3 downto 0);
 begin 
 	
-	-- кнопки и диоды работают в инверсной логике
+	-- input adaptation: due to circuit features buttons operate in reverse logic
 	int_x <= not x;
+
+	-- output adaptation: due to circuit features LEDs operate in reverse logic
 	y <= not int_y;
+	--y <= int_y;
 	
-	-- основная логика работы модуля
+	-- functional load of module
 	int_y <= "1101" when int_x = "0000" else
 	         "0010" when int_x = "0001" else
 	         "1000" when int_x = "0010" else
@@ -31,7 +40,6 @@ begin
 	         "0101" when int_x = "1100" else
 	         "0000" when int_x = "1101" else
 	         "1100" when int_x = "1110" else
-			 "0111";
-			 
+	         "0111";
+
 end architecture;
- 
