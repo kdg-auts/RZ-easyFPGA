@@ -11,3 +11,12 @@ _output_files/
 *.rpt
 *.summary
 *.qws
+*.bak
+*.done
+*.smsg
+*.jdi
+*.pin
+*.sld
+*.cdf
+*.map
+*.pof
