@@ -11,7 +11,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity lab2_beep_demo is
 	generic (
 		BOARD_CLK_FREQ : natural := 50000000; -- CLK frequency in Hz
-		SND_MODE: std_logic := '0' -- output generation mode: '0' = constant, '1' = waveform
+		SND_MODE: std_logic := '1' -- output generation mode: '0' = constant, '1' = waveform
 	);
 	port (
 		CLK : in  STD_LOGIC;
@@ -26,7 +26,7 @@ architecture lab2_beep_demo_arch of lab2_beep_demo is
 
 	constant short_beep_period : natural := BOARD_CLK_FREQ/5; -- 200 ms
 	constant long_beep_period : natural := BOARD_CLK_FREQ; -- 1 sec
-	constant sound_freq_period : natural := BOARD_CLK_FREQ/200; -- 0.5 ms (Fsnd = 2 kHz)
+	constant sound_freq_period : natural := BOARD_CLK_FREQ/2000; -- 0.5 ms (Fsnd = 2 kHz)
 	
 	signal RST_sig : STD_LOGIC;
 	signal SWI_sig : STD_LOGIC_VECTOR (3 downto 0);
